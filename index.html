@@ -16,6 +16,10 @@ span{
 color:#fff
 }
 
+button{
+background-color:"rgba(0,0,0,0.5)"
+}
+
 
  
  </style>
@@ -23,22 +27,28 @@ color:#fff
   <body>	
 	<canvas id="canvas"></canvas>
 	
- <input onclick="test()" type="checkbox" id="mei"/><span id="span">全屏</span>
+ <button onclick="test()" type="button" id="mei">全屏</button>
     <audio src="music/As.mp3" autoplay fill></audio>
   </body>
   <script>
   
   function test() { 
   if (document.fullscreenElement) { 
-  document.exitFullscreen() 
-  
+
+ document.getElementById("mei").style.display="none";
+//  document.getElementById("span").style.display="none";
+//  document.exitFullscreen() 
+//document.getElementById("mei").checkbox=false
   } else { 
-  document.getElementById("mei").style.display="none";
-  document.getElementById("span").style.display="none";
   
-  document.documentElement.requestFullscreen() 
+  document.getElementById("mei").style.display="inline";
+//  document.getElementById("span").style.display="inline"
+ document.documentElement.requestFullscreen() 
+// document.getElementById("mei").checkbox=false
   } 
 }
+
+document.addEventListener("fullscreenchange",test)
 
 
   
