@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	  <meta charset="utf-8"> 
 	<title>小叶-烟花</title>
+ <style>
+ 
+ html,body{
+   margin:0;
+   padding:0;
+   width:100%;
+   height:100%
+}
+
+
+ 
+ </style>
   </head>
-  <style>
-  
-  *{
-    margin:0;
-    padding:0;
-    }
-  
-  body{
-     background-color: black; 
-     }
-  
-  canvas{
-    position:absolute;
-    z-index:0;
-  }
-  
-  
-  </style>
   <body>	
-	<canvas id="canvas">您的浏览器不支持canvas</canvas>
+	<canvas id="canvas"></canvas>
+	
+ <input onclick="test()" type="checkbox" id="mei"/><span id="span">全屏</span>
+    <audio src="music/As.mp3" autoplay fill></audio>
   </body>
   <script>
   
+  function test() { 
+  if (document.fullscreenElement) { 
+  document.exitFullscreen() 
+  
+  } else { 
+  document.getElementById("mei").style.display="none";
+  document.getElementById("span").style.display="none";
+  
+  document.documentElement.requestFullscreen() 
+  } 
+}
+
+
   
   !(function (){
     
+    
     var canvas = document.createElement("canvas");
 	document.body.appendChild(canvas);
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
 
 canvas.style.position= "fixed";
 	canvas.style.left = "0";
@@ -56,6 +67,7 @@ function mouseDownHandler(e) {
     let y = e.clientY;
 
     createFireworks(x,y);
+    
 }
 
 
@@ -67,7 +79,7 @@ var particles=[]
 
 setInterval(function (){
   createFireworks(Math.random()*canvas.width,Math.random()*canvas.height)
-},800)
+},2000)
 
 
 function createFireworks(x,y) {
@@ -120,10 +132,12 @@ function drawFireworks(){
    p.x=vx
    p.y=vy
    
-   if(p.alpha<0){
-      particles.splice(i,1)
+   if(p.alpha<=0){
+      particles.splice(i,1)      
       continue;
    }
+ 
+ 
    
    context.beginPath();
    context.arc(p.x, p.y, p.size, 0, Math.PI*2, false)
@@ -150,9 +164,6 @@ tick();
 
 
 })();
-  
-  
-  
   
   </script>
 </html>
