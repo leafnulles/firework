@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-	  <meta charset="utf-8"> 
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>小叶-烟花</title>
  <style>
  
@@ -9,52 +9,48 @@
    margin:0;
    padding:0;
    width:100%;
-   height:100%
+   height:100%;
+   
 }
-
-span{
-color:#fff
-}
-
-button{
-background-color:"rgba(0,0,0,0.5)"
-}
-
-
  
  </style>
   </head>
   <body>	
 	<canvas id="canvas"></canvas>
-	
- <button onclick="test()" type="button" id="mei">全屏</button>
+    	  <input onclick="test()" type="checkbox" id="mei"/><span id="span">全屏</span>
     <audio src="music/As.mp3" autoplay fill></audio>
   </body>
   <script>
   
-  function test() { 
-  if (document.fullscreenElement) { 
-
- document.getElementById("mei").style.display="none";
-//  document.getElementById("span").style.display="none";
-//  document.exitFullscreen() 
-//document.getElementById("mei").checkbox=false
-  } else { 
   
-  document.getElementById("mei").style.display="inline";
-//  document.getElementById("span").style.display="inline"
- document.documentElement.requestFullscreen() 
-// document.getElementById("mei").checkbox=false
+ // 画布动态适应屏幕大小
+        window.addEventListener('resize',canvasResize);
+        function canvasResize(){
+            canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        canvasResize();
+
+
+function test() { 
+  if (document.fullscreenElement) { 
+  document.exitFullscreen() 
+  
+  } else { 
+  document.getElementById("mei").style.display="none";
+  document.getElementById("span").style.display="none";
+  
+  document.documentElement.requestFullscreen() 
   } 
 }
 
-document.addEventListener("fullscreenchange",test)
 
 
-  
-  !(function (){
+!(function (){
     
-    
+    document.documentElement.requestFullscreen()
+
+
     var canvas = document.createElement("canvas");
 	document.body.appendChild(canvas);
     var canvas = document.getElementById('canvas');
